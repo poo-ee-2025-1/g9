@@ -1,0 +1,29 @@
+### 📌 Diagrama de Casos de Uso
+
+Atores:
+- Sensor
+- Controlador Central
+- Agente de Trânsito
+
+Casos de Uso:
+- Detectar tráfego
+- Ajustar tempo dos semáforos
+- Controlar manualmente os semáforos
+- Registrar histórico
+
+### 📌 Diagrama de Classes
+
+Principais classes:
+- Semaforo: controla os estados (verde, amarelo, vermelho) e seus tempos;
+- Sensor: envia leituras sobre o fluxo de veículos;
+- ControladorCentral: recebe os dados dos sensores e ajusta os semáforos;
+- AgenteDeTransito: usuário que pode ativar controle manual;
+- Historico: registra dados para análises futuras.
+
+### 📌 Diagrama de Sequência
+
+Exemplo de cenário:
+1. O Sensor detecta fluxo de veículos e envia os dados para o ControladorCentral;
+2. O ControladorCentral analisa os dados e atualiza o tempo dos Semaforos;
+3. O Semaforo muda seu estado e tempo conforme decisão;
+4. O Historico salva os dados do evento.
