@@ -1,0 +1,10 @@
+Como funcionam?
+Câmeras instaladas em pontos estratégicos dos cruzamentos semaforizados mensuram a quantidade de veículos.
+Em tempo real, um sistema transforma as imagens em dados.
+Por meio de algoritmos, o sistema ajusta o tempo de abertura dos semáforos.
+O ciclo semafórico de uma subárea será determinado pelo cruzamento mais carregado.
+O sistema procura o conjunto semafórico com maior demanda e replica os ajustes aos demais.
+O tempo de travessia para pedestres é fixo, não se altera, preservando a segurança de quem caminha.
+Por exemplo: se uma via estiver sobrecarregada em relação à outra de um mesmo cruzamento, a que tiver mais veículos ficará com um tempo maior de semáforo aberto, a fim de desafogar o fluxo e gerar fluidez no trânsito.
+
+Fonte:https://g1.globo.com/sp/sao-paulo/noticia/2023/10/19/semaforos-inteligentes-entenda-como-funciona-nova-tecnologia-que-promete-desafogar-transito-na-zona-do-rodizio-em-sao-paulo.ghtml
