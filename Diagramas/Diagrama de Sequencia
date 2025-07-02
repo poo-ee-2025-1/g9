@@ -1,0 +1,13 @@
+@startuml
+actor Sensor
+participant ControladorCentral
+participant Semaforo
+database Historico
+
+Sensor -> ControladorCentral : enviaDadosDeFluxo()
+ControladorCentral -> ControladorCentral : analisaDados()
+ControladorCentral -> Semaforo : atualizaTempoESituacao()
+Semaforo -> Semaforo : mudaEstadoETempo()
+ControladorCentral -> Historico : salvaEvento()
+
+@enduml

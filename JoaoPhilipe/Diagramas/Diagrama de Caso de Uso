@@ -1,0 +1,26 @@
+@startuml
+title Diagrama de Caso de Uso - Sistema de Semáforos Inteligentes
+
+actor "Operador de Tráfego" as Operador
+actor "Pedestre" as Pedestre
+
+rectangle "Sistema de Semáforos Inteligentes" {
+
+  usecase "Captar imagens\nem tempo real" as UC1
+  usecase "Processar imagens e\nextrair dados de tráfego" as UC2
+  usecase "Identificar cruzamento\nmais carregado" as UC3
+  usecase "Ajustar tempo de\nabertura dos semáforos" as UC4
+  usecase "Replicar ajustes\npara outros cruzamentos" as UC5
+  usecase "Manter tempo fixo\npara travessia de pedestres" as UC6
+  usecase "Consultar status dos\nsemafóros e fluxos" as UC7
+
+  UC1 --> UC2 : <<include>>
+  UC2 --> UC3 : <<include>>
+  UC3 --> UC4 : <<include>>
+  UC4 --> UC5 : <<include>>
+
+  Operador --> UC7
+  Pedestre --> UC6
+}
+
+@enduml
