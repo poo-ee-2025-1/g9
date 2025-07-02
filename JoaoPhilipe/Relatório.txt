@@ -1,0 +1,6 @@
+﻿Realizar este trabalho foi um desafio inesperado.
+Nosso primeiro desafio foi a desistência de um dos integrantes e a falta de presença de outro integrante.
+Outro problema foi nossa falta de conhecimento sobre as plataformas. Github era uma plataforma completamente desconhecida que até hoje não entendemos corretamente como utilizá-la. Não só isso, mas nenhum dos integrantes tem conhecimento algum sobre Markdown, incluindo eu.
+Apesar disso, fazer a coleta de dados e os diagramas de Classe e Caso de Uso foi relativamente tranquilo, tive de fazer apenas algumas correções no código para a imagem gerada pelo código ficar correta.
+Por fim, nosso maior problema do momento é com a apresentação. Escolhemos a apresentação gravada por um dos integrantes morar em outra cidade e retornar para lá antes do dia da apresentação. Contudo, fomos surpreendidos pela completa falta de informação com relação a como essa apresentação deve ser feita, e por nenhum dos dois membros ativos possuir editor de vídeo.
+Fim do Relatório
