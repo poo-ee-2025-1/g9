@@ -66,7 +66,6 @@ public class Cruzamento {
 
             semaforos.get("Norte").setEstado(EstadoSemaforo.VERDE, tempoVerde);
             semaforos.get("Sul").setEstado(EstadoSemaforo.VERDE, tempoVerde);
-
             semaforos.get("Leste").setEstado(EstadoSemaforo.VERMELHO, tempoVerde + TEMPO_AMARELO + TEMPO_VERMELHO);
             semaforos.get("Oeste").setEstado(EstadoSemaforo.VERMELHO, tempoVerde + TEMPO_AMARELO + TEMPO_VERMELHO);
         } else {
@@ -75,7 +74,6 @@ public class Cruzamento {
 
             semaforos.get("Leste").setEstado(EstadoSemaforo.VERDE, tempoVerde);
             semaforos.get("Oeste").setEstado(EstadoSemaforo.VERDE, tempoVerde);
-
             semaforos.get("Norte").setEstado(EstadoSemaforo.VERMELHO, tempoVerde + TEMPO_AMARELO + TEMPO_VERMELHO);
             semaforos.get("Sul").setEstado(EstadoSemaforo.VERMELHO, tempoVerde + TEMPO_AMARELO + TEMPO_VERMELHO);
         }
@@ -86,6 +84,16 @@ public class Cruzamento {
         if (tempo < TEMPO_MIN_VERDE) tempo = TEMPO_MIN_VERDE;
         if (tempo > TEMPO_MAX_VERDE) tempo = TEMPO_MAX_VERDE;
         return tempo;
+    }
+
+    private void decidirProximaFase() {
+        int fluxoNS = sensores.get("Norte").getFluxoVeiculos() + sensores.get("Sul").getFluxoVeiculos();
+        int fluxoLO = sensores.get("Leste").getFluxoVeiculos() + sensores.get("Oeste").getFluxoVeiculos();
+        if (fluxoNS >= fluxoLO) {
+            configurarFase("NS");
+        } else {
+            configurarFase("LO");
+        }
     }
 
     public void simularSegundo() {
@@ -101,7 +109,7 @@ public class Cruzamento {
             } else if (semN.getEstado() == EstadoSemaforo.AMARELO && semN.getTempoRestante() <= 0) {
                 semaforos.get("Norte").setEstado(EstadoSemaforo.VERMELHO, TEMPO_VERMELHO);
                 semaforos.get("Sul").setEstado(EstadoSemaforo.VERMELHO, TEMPO_VERMELHO);
-                configurarFase("LO");
+                decidirProximaFase();
             }
         } else {
             Semaforo semL = semaforos.get("Leste");
@@ -111,7 +119,7 @@ public class Cruzamento {
             } else if (semL.getEstado() == EstadoSemaforo.AMARELO && semL.getTempoRestante() <= 0) {
                 semaforos.get("Leste").setEstado(EstadoSemaforo.VERMELHO, TEMPO_VERMELHO);
                 semaforos.get("Oeste").setEstado(EstadoSemaforo.VERMELHO, TEMPO_VERMELHO);
-                configurarFase("NS");
+                decidirProximaFase();
             }
         }
 
@@ -132,7 +140,7 @@ public class Cruzamento {
                 Semaforo sem = semaforos.get(sensor.getDirecao());
 
                 if (sem.getEstado() == EstadoSemaforo.VERDE && sem.getTempoRestante() > 5) {
-                    continue; // aguarda o fim do verde
+                    continue;
                 }
 
                 sem.setEstado(EstadoSemaforo.VERMELHO, 10);
@@ -184,43 +192,6 @@ public class Cruzamento {
               .append("\n");
         }
 
-        sb.append("\nAlertas e Ações do Sistema:\n");
-        boolean alerta = false;
-        boolean defeito = false;
-
-        for (Sensor s : sensores.values()) {
-            if (s.hasAnormalidade()) {
-                alerta = true;
-                sb.append("* Anormalidade detectada na via ").append(s.getDirecao())
-                  .append(": ").append(s.getTipoAnormalidade().name()).append("\n");
-
-                switch (s.getTipoAnormalidade()) {
-                    case EMERGENCIA:
-                        sb.append("  -> Emergência detectada! Sinal na via ").append(s.getDirecao())
-                          .append(" está verde para liberar passagem prioritária.\n");
-                        break;
-                    case OBSTACULO:
-                        sb.append("  -> Obstáculo detectado. Sistema ajusta fluxo para garantir segurança.\n");
-                        break;
-                    default:
-                        sb.append("  -> Anormalidade detectada, ação padrão aplicada.\n");
-                        break;
-                }
-            }
-            if (s.hasDefeitoTecnico()) {
-                defeito = true;
-                sb.append("* Defeito técnico na via ").append(s.getDirecao())
-                  .append(": ").append(s.getDescricaoDefeito()).append("\n");
-            }
-        }
-
-        if (!alerta) {
-            sb.append("Nenhuma anormalidade detectada.\n");
-        }
-        if (!defeito) {
-            sb.append("Nenhum defeito técnico detectado.\n");
-        }
-
         sb.append("\nStatus do sistema: ");
         sb.append(falhaTecnicaAtiva ? "Falha técnica ativa - Semáforos em amarelo piscante" : "Operando normalmente");
         sb.append("\n------------------------------------------------------------\n");
@@ -228,4 +199,3 @@ public class Cruzamento {
         return sb.toString();
     }
 }
-
